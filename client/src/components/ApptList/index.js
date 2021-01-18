@@ -9,7 +9,7 @@ const Appt = () => {
 
 	const allAppts = data?.allAppts || [];
 
-	console.log(allAppts);
+	console.log(data);
 
 	const [appts, setAppts] = useState({});
 
@@ -19,19 +19,20 @@ const Appt = () => {
 		<div>
 			<h1>Services available for purchase</h1>
 			<Row>
-				{allAppts.map((appts) => (
+				{allAppts.map((d) => (
 					<Col sm={12} md={6} lg={4}>
 						<ApptItem
-							key={appts._id}
-							_id={appts._id}
-							title={appts.title}
-							desc={appts.description}
-							price={appts.price}
-							category={appts.category}
-							date={appts.date}
-							time={appts.time}
+							key={d._id}
+							_id={d._id}
+							title={d.title}
+							desc={d.description}
+							price={d.price}
+							category={d.category}
+							date={d.date}
+							time={d.time}
 						/>
-						<p>{appts.title}</p>
+
+						<p>{d.title}</p>
 					</Col>
 				))}
 			</Row>

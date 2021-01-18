@@ -22,7 +22,7 @@ const Header = () => {
 							</LinkContainer>
 							<LinkContainer to='/booking'>
 								<Nav.Link>
-									<i className='fas fa-cut'> </i> Services
+									<i className='fas fa-cut'> </i> Booked Appointments
 								</Nav.Link>
 							</LinkContainer>
 							<LinkContainer to='/login'>

@@ -2,7 +2,7 @@ import React from "react";
 import ApptList from "../components/ApptList";
 import { Container } from "react-bootstrap";
 
-const ApptDetail = () => {
+const Home = () => {
 	return (
 		<Container>
 			<ApptList />
@@ -10,4 +10,4 @@ const ApptDetail = () => {
 	);
 };
 
-export default ApptDetail;
+export default Home;
