@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import { QUERY_ALL_APPTS } from "../utils/queries";
-import ServicePage from "./ServicePage";
+import { QUERY_ALL_APPTS } from "../../utils/queries";
+import ApptItem from "../ApptItem";
 import { useQuery } from "@apollo/react-hooks";
 
 const Appt = () => {
@@ -9,7 +9,9 @@ const Appt = () => {
 
 	const allAppts = data?.allAppts || [];
 
-	const [appts, setAppts] = useState([]);
+	const [appts, setAppts] = useState({});
+
+	useEffect(() => {});
 
 	return (
 		<div>
@@ -17,7 +19,7 @@ const Appt = () => {
 			<Row>
 				{allAppts.map((appts) => (
 					<Col sm={12} md={6} lg={4}>
-						<ServicePage
+						<ApptItem
 							key={appts._id}
 							_id={appts._id}
 							title={appts.title}
@@ -27,6 +29,7 @@ const Appt = () => {
 							date={appts.date}
 							time={appts.time}
 						/>
+						<p>{appts.title}</p>
 					</Col>
 				))}
 			</Row>

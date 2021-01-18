@@ -1,7 +1,9 @@
 import React from "react";
+import { Card } from "react-bootstrap";
+
 import { Link } from "react-router-dom";
 
-const ServicePage = (apptDetail) => {
+const ApptItem = (apptDetail) => {
 	const { _id, title, description, price, category, date, time } = apptDetail;
 
 	return (
@@ -10,10 +12,12 @@ const ServicePage = (apptDetail) => {
 				<div>Individual Appt Detail</div>
 			</Link>
 			<Link to={title}>
-				{title}, {description}, {price}, {category}, {date}, {time}
+				<p>
+					<img src='/client/public/images/braids.jpg' alt='braids'></img>
+				</p>
 			</Link>
 		</div>
 	);
 };
 
-export default ServicePage;
+export default ApptItem;

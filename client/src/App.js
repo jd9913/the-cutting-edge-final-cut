@@ -7,11 +7,12 @@ import {
 } from "react-router-dom";
 import Auth from "./Pages/Auth";
 import Booking from "./Pages/Booking";
-import Appt from "./Pages/Appt";
+import Home from "./Pages/Home";
+import ApptDetail from "./Pages/ApptDetail";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
-import HomePage from "./Pages/HomePage";
+
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
 
@@ -37,9 +38,9 @@ function App() {
 						<Container>
 							<Switch>
 								<Redirect from='/' to='/login' exact />
-								<Route path='/' component={HomePage} exact />
+								<Route path='/' component={Home} exact />
 								<Route path='/login' component={Auth} />
-								<Route path='/appt' component={Appt} />
+								<Route path='/appt' component={ApptDetail} />
 								<Route path='/booking' component={Booking} />
 							</Switch>
 						</Container>
