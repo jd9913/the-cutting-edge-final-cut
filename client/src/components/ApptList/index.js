@@ -9,6 +9,8 @@ const Appt = () => {
 
 	const allAppts = data?.allAppts || [];
 
+	console.log(allAppts);
+
 	const [appts, setAppts] = useState({});
 
 	useEffect(() => {});

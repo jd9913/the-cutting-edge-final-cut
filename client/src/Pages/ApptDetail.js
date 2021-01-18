@@ -5,31 +5,24 @@ import { useQuery } from "@apollo/react-hooks";
 import { QUERY_ALL_APPTS } from "../utils/queries";
 
 const ApptDetail = () => {
-	const { id } = useParams();
+	// const { id } = useParams();
 
-	const [currentAppt, setAppt] = useState({});
+	// const [currentAppt, setAppt] = useState({});
 
 	const { loading, data } = useQuery(QUERY_ALL_APPTS);
 
-	const appts = data?.appts || [];
+	console.log(data);
 
-	useEffect(() => {
-		if (appts.length) {
-			setAppt(appts.find((appt) => appt._id === id));
-		}
-	}, [appts, id]);
+	//data is being populated from the query.  Not sure why it's not displaying below.  This page needs refactored.
 
 	return (
 		<div>
-			<React.Fragment>
-				{currentAppt ? (
-					<div>
-						<Link to='/'>← Back to appts</Link>
-
-						<h2>{currentAppt.title}</h2>
-					</div>
-				) : null}
-			</React.Fragment>
+			<div>
+				<Link to='/'>← Back to appts</Link>
+			</div>
+			<h2>Product detail Here</h2>
+			<p>{data.title}</p>
+			<p>{data.description}</p>
 		</div>
 	);
 };
