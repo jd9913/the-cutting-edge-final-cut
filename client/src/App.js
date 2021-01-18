@@ -12,26 +12,42 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Container } from "react-bootstrap";
 import HomePage from "./Pages/HomePage";
+import { ApolloProvider } from "@apollo/react-hooks";
+import ApolloClient from "apollo-boost";
+
+const client = new ApolloClient({
+	request: (operation) => {
+		const token = localStorage.getItem("id_token");
+		operation.setContext({
+			headers: {
+				authorization: token ? `Bearer ${token}` : "",
+			},
+		});
+	},
+	uri: "graphql",
+});
 
 function App() {
 	return (
-		<Router>
-			<React.Fragment>
-				<Header />
-				<main className='py-3'>
-					<Container>
-						<Switch>
-							<Redirect from='/' to='/login' exact />
-							<Route path='/' component={HomePage} exact />
-							<Route path='/login' component={Auth} />
-							<Route path='/appt' component={Appt} />
-							<Route path='/booking' component={Booking} />
-						</Switch>
-					</Container>
-				</main>
-				<Footer />
-			</React.Fragment>
-		</Router>
+		<ApolloProvider client={client}>
+			<Router>
+				<React.Fragment>
+					<Header />
+					<main className='py-3'>
+						<Container>
+							<Switch>
+								<Redirect from='/' to='/login' exact />
+								<Route path='/' component={HomePage} exact />
+								<Route path='/login' component={Auth} />
+								<Route path='/appt' component={Appt} />
+								<Route path='/booking' component={Booking} />
+							</Switch>
+						</Container>
+					</main>
+					<Footer />
+				</React.Fragment>
+			</Router>
+		</ApolloProvider>
 	);
 }
 
