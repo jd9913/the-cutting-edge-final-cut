@@ -21,7 +21,7 @@ const Cart = () => {
       if (!cart.length) {
           (async () => {
               const cart = await idbPromise('cart', 'get');
-              dispatch({ type: ADD_MULTIPLE_TO_CART, styles: [...cart] });
+              dispatch({ type: ADD_MULTIPLE_TO_CART, products: [...cart] });
           })()
       }
   }, [cart.length, dispatch]);
@@ -40,16 +40,16 @@ const Cart = () => {
     }
 
     const submitCheckout = () => {
-        const styleIds = [];
+        const productIds = [];
       
         cart.forEach((item) => {
           for (let i = 0; i < item.purchaseQuantity; i++) {
-            styleIds.push(item._id);
+            productIds.push(item._id);
           }
         });
 
         getCheckout({
-            variables: { styles: styleIds }
+            variables: { products: productIds }
           });
       }
       const [getCheckout, { data }] = useLazyQuery(QUERY_CHECKOUT);

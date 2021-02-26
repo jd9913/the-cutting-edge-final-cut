@@ -1,5 +1,5 @@
 import React from "react";
-import StyleList from "../components/StyleList";
+import ProductList from "../components/ProductList";
 import CategoryMenu from "../components/CategoryMenu";
 import Cart from "../components/Cart";
 
@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div className="container">
       <CategoryMenu />
-      <StyleList />
+      <ProductList />
       <Cart />
     </div>
   );

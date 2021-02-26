@@ -5,9 +5,12 @@ import { ADD_ORDER } from "../utils/mutations";
 import { idbPromise } from "../utils/helpers";
 import { Link } from "react-router-dom";
 import heroImage from "../assets/hero-image.jpeg";
+<<<<<<< Updated upstream
 
 
 
+=======
+>>>>>>> Stashed changes
 
 function Success() {
   const [addOrder] = useMutation(ADD_ORDER);
@@ -15,6 +18,7 @@ function Success() {
   useEffect(() => {
     async function saveOrder() {
       const cart = await idbPromise('cart', 'get');
+<<<<<<< Updated upstream
       const styles = cart.map(item => item._id);
       console.log(styles);
       if (styles.length) {
@@ -22,6 +26,15 @@ function Success() {
         const styleData = data.addOrder.styles;
         
         styleData.forEach((item) => {
+=======
+      const products = cart.map(item => item._id);
+      console.log(products);
+      if (products.length) {
+        const { data } = await addOrder({ variables: { products } });
+        const productData = data.addOrder.products;
+        
+        productData.forEach((item) => {
+>>>>>>> Stashed changes
           idbPromise('cart', 'delete', item);
         });
       }

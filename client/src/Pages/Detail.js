@@ -8,9 +8,9 @@ import {
   REMOVE_FROM_CART,
   UPDATE_CART_QUANTITY,
   ADD_TO_CART,
-  UPDATE_STYLES,
+  UPDATE_PRODUCTS,
 } from "../utils/actions";
-import { QUERY_STYLES } from "../utils/queries";
+import { QUERY_PRODUCTS } from "../utils/queries";
 import { idbPromise } from "../utils/helpers";
 import spinner from '../assets/spinner.gif'
 
@@ -19,38 +19,38 @@ function Detail() {
   const state = useSelector(state => state);
   const { id } = useParams();
 
-  const [currentStyle, setCurrentStyle] = useState({});
+  const [currentProduct, setCurrentProduct] = useState({});
 
-  const { loading, data } = useQuery(QUERY_STYLES);
+  const { loading, data } = useQuery(QUERY_PRODUCTS);
 
-  const { styles, cart } = state;
+  const { products, cart } = state;
 
   useEffect(() => {
     // already in global store
-    if (styles.length) {
-      setCurrentStyle(styles.find(style => style._id === id));
+    if (products.length) {
+      setCurrentProduct(products.find(product => product._id === id));
     } 
     // retrieved from server
     else if (data) {
       dispatch({
-        type: UPDATE_STYLES,
-        styles: data.styles
+        type: UPDATE_PRODUCTS,
+        products: data.products
       });
 
-      data.styles.forEach((style) => {
-        idbPromise('styles', 'put', style);
+      data.products.forEach((product) => {
+        idbPromise('products', 'put', product);
       });
     }
     // get cache from idb
     else if (!loading) {
-      idbPromise('styles', 'get').then((indexedStyles) => {
+      idbPromise('products', 'get').then((indexedProducts) => {
         dispatch({
-          type: UPDATE_STYLES,
-          styles: indexedStyles
+          type: UPDATE_PRODUCTS,
+          products: indexedProducts
         });
       });
     }
-  }, [styles, data, loading, dispatch, id]);
+  }, [products, data, loading, dispatch, id]);
 
   const addToCart = () => {
     const itemInCart = cart.find((cartItem) => cartItem._id === id)
@@ -67,9 +67,9 @@ function Detail() {
     } else {
       dispatch({
         type: ADD_TO_CART,
-        style: { ...currentStyle, purchaseQuantity: 1 }
+        product: { ...currentProduct, purchaseQuantity: 1 }
       });
-      idbPromise('cart', 'put', { ...currentStyle, purchaseQuantity: 1 });
+      idbPromise('cart', 'put', { ...currentProduct, purchaseQuantity: 1 });
 
     }
   }
@@ -77,35 +77,35 @@ function Detail() {
   const removeFromCart = () => {
     dispatch({
       type: REMOVE_FROM_CART,
-      _id: currentStyle._id
+      _id: currentProduct._id
     });
 
-    idbPromise('cart', 'delete', { ...currentStyle });
+    idbPromise('cart', 'delete', { ...currentProduct });
   };
 
   return (
     <>
-      {currentStyle && cart ? (
+      {currentProduct && cart ? (
         <div className="container my-1">
           <Link to="/">
             ← Back to Our Services
           </Link>
 
-          <h2>{currentStyle.name}</h2>
+          <h2>{currentProduct.name}</h2>
 
           <p>
-            {currentStyle.description}
+            {currentProduct.description}
           </p>
 
           <p>
             <strong>Price:</strong>
-            ${currentStyle.price}
+            ${currentProduct.price}
             {" "}
             <button onClick={addToCart}>
               Add to Cart
             </button>
             <button 
-              disabled={!cart.find(p => p._id === currentStyle._id)} 
+              disabled={!cart.find(p => p._id === currentProduct._id)} 
               onClick={removeFromCart}
             >
               Remove from Cart
@@ -113,8 +113,8 @@ function Detail() {
           </p>
 
           <img
-            src={`/images/${currentStyle.image}`}
-            alt={currentStyle.name}
+            src={`/images/${currentProduct.image}`}
+            alt={currentProduct.name}
           />
         </div>
       ) : null}

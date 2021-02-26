@@ -26,9 +26,15 @@ function OrderHistory() {
               <div key={order._id} className="my-2">
                 <h4>{new Date(parseInt(order.purchaseDate)).toLocaleDateString()}</h4>
                 <div className="flex-row">
+<<<<<<< Updated upstream
                   {order.styles.map(({ _id, image, name, price }, index) => (
                     <div key={index} className="card border-secondary px-1 py-1">
                       <Link to={`/styles/${_id}`}>
+=======
+                  {order.products.map(({ _id, image, name, price }, index) => (
+                    <div key={index} className="card border-secondary px-1 py-1">
+                      <Link to={`/products/${_id}`}>
+>>>>>>> Stashed changes
                         <img
                           alt={name}
                           src={`/images/${image}`}

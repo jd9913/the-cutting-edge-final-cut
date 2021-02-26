@@ -1,5 +1,5 @@
 import {
-    UPDATE_STYLES,
+    UPDATE_PRODUCTS,
     UPDATE_CATEGORIES,
     UPDATE_CURRENT_CATEGORY,
     ADD_TO_CART,
@@ -11,7 +11,7 @@ import {
   } from './actions';
 
   const initialState = {
-    styles: [],
+    products: [],
     categories: [],
     currentCategory: '',
     cart: [],
@@ -22,10 +22,10 @@ import {
 export const reducers = (state= initialState, action) => {
     switch (action.type) {
         // if action type value is the value of `UPDATE_STYLES`, return a new state object with an updated styles array
-        case UPDATE_STYLES:
+        case UPDATE_PRODUCTS:
             return {
                 ...state,
-                styles: [...action.styles],
+                products: [...action.products],
             };
 
             // if action type value is the value of `UPDATE_CATEGORIES`, return a new state object with an updated categories array
@@ -44,16 +44,16 @@ export const reducers = (state= initialState, action) => {
             return {
                 ...state,
                 cartOpen: true,
-                cart: [...state.cart, action.style]
+                cart: [...state.cart, action.product]
             };
         case ADD_MULTIPLE_TO_CART:
             return {
                 ...state,
-                cart: [...state.cart, ...action.styles],
+                cart: [...state.cart, ...action.products],
             };
         case REMOVE_FROM_CART:
-            let newState = state.cart.filter(style => {
-                return style._id !== action._id;
+            let newState = state.cart.filter(product => {
+                return product._id !== action._id;
             });
             
             return {
@@ -66,11 +66,11 @@ export const reducers = (state= initialState, action) => {
             return {
                 ...state,
                 cartOpen: true,
-                cart: state.cart.map(style => {
-                if (action._id === style._id) {
-                    style.purchaseQuantity = action.purchaseQuantity;
+                cart: state.cart.map(product => {
+                if (action._id === product._id) {
+                    product.purchaseQuantity = action.purchaseQuantity;
                 }
-                return style;
+                return product;
                 })
             };
 

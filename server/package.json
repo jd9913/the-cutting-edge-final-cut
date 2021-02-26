@@ -1,5 +1,5 @@
 {
-  "name": "thecuttingedge-server",
+  "name": "mern-server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -17,7 +17,7 @@
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.7",
-    "stripe": "^8.131.1"
+    "stripe": "^8.130.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
