@@ -11,20 +11,25 @@
 	"scripts": {
 		"start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
 		"start:prod": "cd server && npm start",
-		"start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+		"dev": "concurrently \"npm run server\" \"npm run client\"",
 		"install": "cd server && npm i && cd ../client && npm i",
-		"seed": "cd server && npm run seed",
-		"heroku-postbuild": "cd client && npm run build"
+		"seed:import": "node server/seeder",
+		"seed:destroy": "node server/seeder -d",
+		"heroku-postbuild": "cd client && npm run build",
+		"server": "nodemon server/server",
+		"client": "npm start --prefix client"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"@fortawesome/free-brands-svg-icons": "^5.15.2",
 		"@fortawesome/free-regular-svg-icons": "^5.15.2",
+		"bcryptjs": "^2.4.3",
 		"colors": "^1.4.0",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
-		"if-env": "^1.0.4"
+		"if-env": "^1.0.4",
+		"mongoose": "^5.11.18"
 	},
 	"devDependencies": {
 		"@types/jwt-decode": "^3.1.0",

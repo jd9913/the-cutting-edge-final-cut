@@ -125,23 +125,5 @@ db.once("open", async () => {
 		},
 	]);
 
-	console.log("products seeded");
 
-	await User.deleteMany();
 
-	await User.create({
-		firstName: "Terahje",
-		lastName: "Tester",
-		email: "terahje@test.com",
-		password: "tester",
-		orders: [
-			{
-				products: [products[0]._id, products[0]._id, products[1]._id],
-			},
-		],
-	});
-
-	console.log("users seeded");
-
-	process.exit();
-});
