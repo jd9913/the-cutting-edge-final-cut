@@ -28,8 +28,10 @@
 		"colors": "^1.4.0",
 		"dotenv": "^8.2.0",
 		"express": "^4.17.1",
+		"express-async-handler": "^1.1.4",
 		"if-env": "^1.0.4",
-		"mongoose": "^5.11.18"
+		"mongoose": "^5.11.18",
+		"redux": "^4.0.5"
 	},
 	"devDependencies": {
 		"@types/jwt-decode": "^3.1.0",
